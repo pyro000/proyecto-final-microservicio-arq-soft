@@ -1,0 +1,87 @@
+openapi: 3.0.3
+info:
+  title: Microservicio de Optimización de Portafolio
+  version: 1.0.0
+paths:
+  /optimizar:
+    post:
+      summary: Optimiza la selección de proyectos (mochila 0/1)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OptimizarInput'
+            examples:
+              CasoExito1:
+                value:
+                  capacidad: 10000
+                  objetos:
+                    - { nombre: "Fondo_A", peso: 2000, ganancia: 1500 }
+                    - { nombre: "Fondo_B", peso: 4000, ganancia: 3500 }
+                    - { nombre: "Fondo_C", peso: 5000, ganancia: 4000 }
+                    - { nombre: "Fondo_D", peso: 3000, ganancia: 2500 }
+                    - { nombre: "Fondo_E", peso: 1500, ganancia: 1800 }
+      responses:
+        '200':
+          description: Resultado óptimo
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OptimizarOutput'
+  /runs:
+    get:
+      summary: Lista ejecuciones almacenadas
+      parameters:
+        - in: query
+          name: limit
+          schema: { type: integer, minimum: 1, maximum: 50 }
+        - in: query
+          name: page
+          schema: { type: integer, minimum: 1 }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        _id: { type: string }
+                        createdAt: { type: string, format: date-time }
+                        input: { $ref: '#/components/schemas/OptimizarInput' }
+                        result: { $ref: '#/components/schemas/OptimizarOutput' }
+                  total: { type: integer }
+                  page: { type: integer }
+                  limit: { type: integer }
+components:
+  schemas:
+    Item:
+      type: object
+      required: [nombre, peso, ganancia]
+      properties:
+        nombre: { type: string }
+        peso: { type: integer, minimum: 0 }
+        ganancia: { type: integer, minimum: 0 }
+    OptimizarInput:
+      type: object
+      required: [capacidad, objetos]
+      properties:
+        capacidad: { type: integer, minimum: 0 }
+        objetos:
+          type: array
+          minItems: 1
+          items: { $ref: '#/components/schemas/Item' }
+    OptimizarOutput:
+      type: object
+      properties:
+        seleccionados:
+          type: array
+          items: { type: string }
+        ganancia_total: { type: integer }
+        peso_total: { type: integer }

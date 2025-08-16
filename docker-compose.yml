@@ -1,0 +1,36 @@
+version: "3.9"
+services:
+  mongo:
+    image: mongo:6
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    platform: linux/amd64
+
+  backend:
+    build: ./backend
+    env_file:
+      - ./backend/.env
+    environment:
+      - PORT=3000
+      - MONGODB_URI=mongodb://mongo:27017/knapsack
+    depends_on:
+      - mongo
+    ports:
+      - "3000:3000"
+    platform: linux/amd64
+
+  frontend:
+    build: ./frontend
+    depends_on:
+      - backend
+    ports:
+      - "5173:80"
+    environment:
+      - VITE_API_BASE_URL=http://localhost:3000
+    platform: linux/amd64
+
+volumes:
+  mongo_data:
