@@ -1,5 +1,7 @@
 # Proyecto: Backend Node.js + TypeScript – Microservicio /optimizar
 
+<img width="1037" height="902" alt="image" src="https://github.com/user-attachments/assets/32ff2815-afa9-4b5e-bc87-c8c2035eaf0a" />
+
 Cristhian Augusto Romero Mesías
 
 ## Descripción
