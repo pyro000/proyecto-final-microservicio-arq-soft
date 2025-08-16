@@ -63,11 +63,14 @@ VITE_API_BASE_URL=http://localhost:3000
 
 
 ## Docker Compose
+
+En la raíz del proyecto:
+
 ```bash
 docker compose up --build
 ```
 
-### Opción B: Contenedores por separado
+### Opción B: Contenedores Docker por separado
 **Backend**
 ```bash
 cd backend
