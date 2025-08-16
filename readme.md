@@ -1,5 +1,7 @@
 # Proyecto: Backend Node.js + TypeScript – Microservicio /optimizar
 
+Cristhian Augusto Romero Mesías
+
 ## Descripción
 Este proyecto implementa un microservicio en Node.js con TypeScript y MongoDB que resuelve el problema de la mochila 0/1 (Knapsack) para optimizar la selección de proyectos en base a su ganancia y costo. Incluye un frontend en React + Vite que permite interactuar con el servicio, visualizar resultados y consultar ejecuciones almacenadas en MongoDB.
 
@@ -95,5 +97,4 @@ Reemplazar `\` con ` para powershell
 - **Puertos ocupados**: cambia los mapeos `3000:3000` o `5173:80` por otros libres.
 
 ## Licencia
-MIT
 MIT
